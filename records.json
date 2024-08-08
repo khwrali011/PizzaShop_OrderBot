@@ -1,0 +1,26 @@
+{
+    "user": [
+        "Hi",
+        "I would like to order a pizza.",
+        "I would like a cheeze pizza with extra toppings",
+        "Large Cheeze pizza. What toppings do you have?",
+        "I want AI sauce. What drinks do you have?",
+        "I would like bottled water.",
+        "No",
+        "Delivery",
+        "3 John Street, New York",
+        "Cash"
+    ],
+    "assistant": [
+        "Hello! Welcome to our pizza restaurant. How can I assist you today?",
+        "Great! Which type of pizza would you like to order? We have pepperoni pizza, cheese pizza, and eggplant pizza.",
+        "Sure! What size would you like for your cheese pizza? We have small, medium, and large.",
+        "For toppings, we have extra cheese for $2.00, mushrooms for $1.50, sausage for $3.00, Canadian bacon for $3.50, AI sauce for $1.50, and peppers for $1.00. Which toppings would you like to add to your large cheese pizza?",
+        "Great choice! For drinks, we have coke in three sizes: small for $1.00, medium for $2.00, and large for $3.00. We also have sprite in the same sizes, and bottled water for $5.00. Which drink would you like to add to your order?",
+        "Certainly! Adding a bottled water to your order. Is there anything else you would like to add to your order?",
+        "Alright, I have your order of a large cheese pizza with AI sauce and a bottled water. Is this for pickup or delivery?",
+        "Great! Could you please provide me with the delivery address?",
+        "Thank you for providing the delivery address as 3 John Street, New York. Your order of a large cheese pizza with AI sauce and a bottled water will be delivered to that address. The total amount for your order is $17.45. How would you like to make the payment?",
+        "Perfect! We will accept cash payment upon delivery. Your order will be prepared and delivered to 3 John Street, New York. Thank you for choosing our pizza restaurant! If you have any further questions or need assistance, feel free to ask."
+    ]
+}

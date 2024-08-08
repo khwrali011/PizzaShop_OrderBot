@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Shop Chatbot</title>
+    <style>
+        /* Basic styles for the page */
+        body {
+            font-family: Arial, sans-serif; /* Default font for the body */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-family: 'Courier New', Courier, monospace; /* Font for the heading */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #chatPanel {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .message {
+            margin: 5px 0;
+        }
+        .user-message {
+            font-family: 'Verdana', sans-serif; /* Font for user messages */
+            text-align: right;
+            color: blue;
+        }
+        .bot-message {
+            font-family: 'Georgia', serif; /* Font for assistant messages */
+            text-align: left;
+            color: green;
+        }
+        #jsonInput {
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+        button {
+            margin: 5px;
+        }
+        #loading {
+            display: none;
+            font-style: italic;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Pizza Shop Chatbot</h1>
+
+<div>
+    <div id="chatPanel"></div>
+    <form id="jsonForm">
+        <textarea id="jsonInput" rows="2" cols="50" placeholder='Enter your message here!'></textarea>
+        <button type="button" id="generateResponseBtn">Send</button>
+    </form>
+    <div id="loading">Generating response, please wait...</div>
+</div>
+
+<script>
+    document.getElementById('generateResponseBtn').addEventListener('click', () => {
+        const inputValue = document.getElementById('jsonInput').value.trim();
+        if (inputValue === '') {
+            alert('Please enter a message.');
+            return;
+        }
+        sendRequest('/generate_response');
+    });
+
+    function sendRequest(endpoint) {
+        const stringInputValue = document.getElementById('jsonInput').value;
+        appendMessage('user', stringInputValue); // Display user message
+        document.getElementById('jsonInput').value = ''; // Clear input
+        document.getElementById('loading').style.display = 'block'; // Show loading indicator
+
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain'
+            },
+            body: stringInputValue
+        })
+        .then(response => {
+            document.getElementById('loading').style.display = 'none'; // Hide loading indicator
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); // Parse response as text
+        })
+        .then(data => {
+            appendMessage('bot', data); // Display bot response
+        })
+        .catch(error => {
+            appendMessage('bot', `Error: ${error.message}`);
+        });
+    }
+
+    function appendMessage(sender, message) {
+        const chatPanel = document.getElementById('chatPanel');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message';
+        messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+        messageDiv.innerText = message;
+        chatPanel.appendChild(messageDiv);
+        chatPanel.scrollTop = chatPanel.scrollHeight; // Scroll to the bottom
+    }
+</script>
+</body>
+</html>
